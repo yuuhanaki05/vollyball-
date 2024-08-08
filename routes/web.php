@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MemoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,4 +32,10 @@ Route::middleware('auth')->group(function () {
     
 Route::get('/user',[UserController::class, 'index'])->middleware('auth')->name('user.index');
 Route::get('/memo',[MemoController::class, 'index'])->middleware('auth')->name('memo.index');
+Route::get('/memos/create', [MemoController::class, 'create']);
+Route::get('/memos/{memo}', [MemoController::class ,'show']);
+Route::post('/memos', [MemoController::class, 'store']);
+Route::get('/memos/{memo}/edit', [MemoController::class, 'edit']);
+Route::put('/memos/{memo}', [MemoController::class, 'update']);
+Route::delete('/memos/{memo}', [MemoController::class,'delete']);
 require __DIR__.'/auth.php';
