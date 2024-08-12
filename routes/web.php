@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MemoController;
+use App\Http\Controllers\PlayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +39,12 @@ Route::post('/memos', [MemoController::class, 'store']);
 Route::get('/memos/{memo}/edit', [MemoController::class, 'edit']);
 Route::put('/memos/{memo}', [MemoController::class, 'update']);
 Route::delete('/memos/{memo}', [MemoController::class,'delete']);
+
+Route::get('/player',[PlayerController::class, 'index'])->middleware('auth')->name('player.index');
+Route::get('/players/create', [PlayerController::class, 'create']);
+Route::get('/players/{player}', [PlayerController::class ,'show']);
+Route::post('/players', [PlayerController::class, 'store']);
+Route::get('/players/{player}/edit', [PlayerController::class, 'edit']);
+Route::put('/players/{player}', [PlayerController::class, 'update']);
+Route::delete('/players/{player}', [PlayerController::class,'delete']);
 require __DIR__.'/auth.php';
