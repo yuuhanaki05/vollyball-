@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('memo.index')" :active="request()->routeIs('memo.index')">
                         {{ __('メモ') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('player.index')" :active="request()->routeIs('player.index')">
+                        {{ __('選手') }}
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -15,7 +15,7 @@
             </div>
             <div class="body">
                 <h2>Body</h2>
-                <textarea name="memo[body]" placeholder="今日も1日お疲れさまでした。"></textarea>
+                <textarea name="memo[body]" placeholder="メモ"></textarea>
                 <p class="body__error" style="color:red">{{ $errors->first('memo.body') }}</p>
             </div>
             <input type="submit" value="保存"/>
