@@ -3,11 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Posts</title>
+        <title>Player</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
+    <h1>選手一覧</h1>
         <h1 class="name">
             {{ $player->name }}
         </h1>

@@ -18,7 +18,13 @@
             </div>
             <div class='content__position'>
                 <h2>ポジション</h2>
-                <input type='text' name='player[position]' value="{{ $player->position }}">
+                <select name="player[position]">
+                  <option value="OH">OH</option>
+                  <option value="S">S</option>
+                  <option value="MB">MB</option>
+                  <option value="L">L</option>
+                  <option value="OP">OP</option>
+                </select>
             </div>
             <input type="submit" value="保存">
         </form>
