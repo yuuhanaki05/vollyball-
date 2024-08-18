@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MemoController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\GameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +48,13 @@ Route::post('/players', [PlayerController::class, 'store']);
 Route::get('/players/{player}/edit', [PlayerController::class, 'edit']);
 Route::put('/players/{player}', [PlayerController::class, 'update']);
 Route::delete('/players/{player}', [PlayerController::class,'delete']);
+
+Route::get('/game',[GameController::class, 'index'])->middleware('auth')->name('game.index');
+Route::get('/games/create', [GameController::class, 'create'])->middleware('auth')->name('game.create');
+Route::get('/games/{game}', [GameController::class ,'show']);
+Route::post('/games', [GameController::class, 'store']);
+Route::get('/games/{game}/edit', [GameController::class, 'edit']);
+Route::put('/games/{game}', [GameController::class, 'update']);
+Route::delete('/games/{game}', [GameController::class,'delete']);
+Route::post('/games/{id}', 'GameController@update');
 require __DIR__.'/auth.php';
