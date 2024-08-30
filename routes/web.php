@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MemoController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\GameController;
-
+use App\Http\Controllers\SetController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,4 +57,12 @@ Route::get('/games/{game}/edit', [GameController::class, 'edit']);
 Route::put('/games/{game}', [GameController::class, 'update']);
 Route::delete('/games/{game}', [GameController::class,'delete']);
 Route::post('/games/{id}', 'GameController@update');
+
+Route::get('/set',[SetController::class, 'index'])->middleware('auth')->name('set.index');
+Route::get('/sets/create', [SetController::class, 'create']);
+Route::get('/sets/{set_id}', [SetController::class ,'show']);
+Route::post('/sets', [SetController::class, 'store']);
+Route::get('/sets/{set}/edit', [SetController::class, 'edit']);
+Route::put('/sets/{set}', [SetController::class, 'update']);
+Route::delete('/sets/{set}', [SetController::class,'delete']);
 require __DIR__.'/auth.php';
