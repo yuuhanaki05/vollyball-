@@ -6,6 +6,10 @@ use App\Models\Game;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\GameRequest;
+use App\Models\Player;
+use App\Models\Position;
+use App\Models\Set;
+use App\Http\Requests\SetRequest;
 
 class GameController extends Controller
 {
@@ -13,24 +17,68 @@ class GameController extends Controller
     {
         return view('game.index')->with(['games' => $game->getPaginateByLimit()]);
     }
-    public function show(Game $game)
+    public function show(Game $game, Set $set, Position $position)
     {
-        return view('game.show')->with(['game' => $game]);
+        $sets = $set->where('game_id', $game->id)->get();
+        $positions = $position->where('game_id', $game->id)->get();
+        return view('game.show')->with(['game' => $game, 'sets' => $sets, 'positions' => $positions]);
     }
     public function create(Game $game)
     {
-        return view('game.create')->with(['games' => $game->getPaginateByLimit()]);
+        $players = Player::where('user_id', Auth::id())->get(); 
+        return view('game.create')->with(['games' => $game->getPaginateByLimit(), 'players' => $players]);
     }
-    public function store(GameRequest $request, Game $game, Player $player)
+    public function store(GameRequest $request, Set $set, Game $game)
     {
-        $input = $request['game'];
-        $input['user_id'] = Auth::id();
-        $game->fill($input)->save();
-        return redirect('/games/' . $game->id);
+              // 送られてきたリクエストの確認（アプリが動くためにはコメントアウトか削除すること）
+
+        //dd($request);
+        // リクエストからそれぞれ分類
+        $input_game = $request['game'];
+        $input_position = $request['position'];
+        $input_set = $request['set'];
+        //dd($input_set);
+
+        // gamesのデータ作成
+        $game = new Game();
+        $game->user_id = Auth::id();
+        $game->fill($input_game)->save();
+        $game_id = $game->id;
+        //dd($game_id);
+
+        // positionsのデータの作成
+        for($i = 0; $i < 7; $i++) {
+            $position = new Position();
+            $position->game_id = $game->id;
+            $position->player_id = $input_position[$i]['player_id'];
+            $position->initial_position = $input_position[$i]['initial_position'];
+            $position->save();
+        }
+        //dd($game_id);
+            $input = $request['set'];
+            //dd($request['set']['game_id']);
+            $me_input = $request['me'];
+            $op_input = $request['op'];
+            // setsのデータの作成
+           //dd($input);
+        //for($i = 1; $i <= $input; $i++) {
+        foreach ($input as $index => $point) {
+            //dd($point);
+            $set = new Set();
+            $set->game_id = $game_id;
+            $set->set_index = $index;
+            $set->our_points = $point['our_points'];
+            $set->opponent_points = $point['opponent_points'];
+            $set->save();
+        }
+        $players = $position->where('game_id', $game_id)->select('player_id', 'initial_position')->get();
+        return redirect('/games/' . $game->id)->with(compact('set','players','game'));
     }
     public function edit(Game $game)
     {
-        return view('game.edit')->with(['game' => $game]);
+         $players = Player::where('user_id', Auth::id())->get(); 
+        return view('game.edit')->with(['games' => $game->getPaginateByLimit(), 'players' => $players]);
+        
     }
     public function update(GameRequest $request, Game $game)
     {

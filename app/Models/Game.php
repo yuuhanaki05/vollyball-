@@ -23,7 +23,7 @@ class Game extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function getPaginateByLimit(int $limit_count = 7)
+    public function getPaginateByLimit(int $limit_count =7)
     {
         return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
