@@ -1,6 +1,7 @@
 <x-app-layout>
     <x-slot name="title">試合データ</x-slot>
     <h1>ポジション</h1>
+
     <form class="w-full" action="/games" method="POST">
         @csrf
        <div class="m-5">
@@ -63,10 +64,12 @@
             </div>
 
             <div><svg class="h-8 w-8 text-slate-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <line x1="5" y1="12" x2="19" y2="12" /></svg></div>
+
             
             <div class="opponent">
                 <input type="text" name="game[opponent_name]" placeholder="相手チーム名"/>
                 <p class="name__error" style="color:red">{{ $errors->first('game.opponent_name') }}</p>
+
             </div>   
         </div>             
 
@@ -91,6 +94,7 @@
         </div>
     </form>
     <div class="flex justify-center">
+
         [<a href="/game">戻る</a>]
     </div>
     <script>
@@ -131,11 +135,13 @@
             // HTMLを挿入(me)
            //<div class="flex justify-center ...">
            //<div>
+
             score_me_place.innerHTML = `
                 <button id="btn_score_me_${set}" type="button">me</button>
                 <div id="div_score_me_${set}">0</div>
                 <input type="hidden" id="input_score_me_${set}" name="set[${set}][our_points]">
             `;
+
             score_place.appendChild(score_me_place);
            // </div>
             arow_place.innerHTML = `
@@ -166,13 +172,12 @@
             div_score_op[set] = document.getElementById(`div_score_op_${set}`);
             input_score_op[set] = document.getElementById(`input_score_op_${set}`);
 
-            
+
             btn_score_me[set].addEventListener('click', () => {
                 score_me += 1;
                 div_score_me[set].textContent = score_me;
                 input_score_me[set].value = score_me;
             });
-            
             btn_score_op[set].addEventListener('click', () => {
                 score_op += 1;
                 div_score_op[set].textContent = score_op;

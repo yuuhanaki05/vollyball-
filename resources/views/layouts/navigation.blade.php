@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('game.index')" :active="request()->routeIs('game.index')">
                         {{ __('試合結果') }}
                     </x-nav-link>
+                    {{--<x-nav-link :href="route('set.index')" :active="request()->routeIs('set.index')">
+                        {{ __('セット詳細') }}
+                    </x-nav-link>--}}
                 </div>
             </div>
 
