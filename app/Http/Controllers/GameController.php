@@ -47,7 +47,8 @@ class GameController extends Controller
         //dd($game_id);
 
         // positionsのデータの作成
-        for($i = 0; $i < 7; $i++) {
+
+        for($i = 0; $i <= 6; $i++) {
             $position = new Position();
             $position->game_id = $game->id;
             $position->player_id = $input_position[$i]['player_id'];
@@ -76,14 +77,24 @@ class GameController extends Controller
     }
     public function edit(Game $game)
     {
-         $players = Player::where('user_id', Auth::id())->get(); 
-        return view('game.edit')->with(['games' => $game->getPaginateByLimit(), 'players' => $players]);
-        
+
+        $players = Player::where('user_id', Auth::id())->get(); 
+        //$players = $position->where('game_id', $game_id)->select('player_id', 'initial_position')->get();
+        //dd(array_slice($game->positions->toArray(), 0, 6, true));
+        //foreach(array_slice($game->positions->toArray(), 0, 6, true) as $position)
+        //{dd($position['id']);}
+        //dd($game->sets);
+        return view('/game/edit')->with(compact('players','game'));
     }
     public function update(GameRequest $request, Game $game)
     {
     $input_post = $request['game'];
+    //dd($request['point']);
     $game->fill($input_post)->save();
+    
+    $request['game']->$index;
+    $request['game']->$point;
+    
 
     return redirect('/games/' . $game->id);
     }

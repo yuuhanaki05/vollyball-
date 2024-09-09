@@ -4,20 +4,21 @@
     <h1>メモ一覧</h1>
 
     
-    <h1>Blog Name</h1>
-    <div class='memos'>
+    <h1>メモ</h1>
+    <div class='text-blue-700'>
         <a href='/memos/create'>create</a>
+    </div>
+    <div class="text">
         @foreach ($memos as $memo)
             <div class='memo'>
                 <h2 class='title'>
                     <a href="/memos/{{ $memo->id }}">{{ $memo->title }}</a>
                 </h2>
-                <p class='body'>{{ $memo->body }}</p>
-                <form action="/memos/{{ $memo->id }}" id="form_{{ $memo->id }}" method="post">
                     @csrf
                     @method('DELETE')
+                    <div class="text-rose-500">
                     <button type="button" onclick="deletePost({{ $memo->id }})">delete</button>
-                </form>
+                    </div>
             </div>
         @endforeach
     </div>

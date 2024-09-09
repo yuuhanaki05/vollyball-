@@ -1,27 +1,25 @@
-<!DOCTYPE HTML>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Memos</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body>
+<x-app-layout>
+     <x-slot name="header">メモ</x-slot>
+    <x-slot name="title">メモ</x-slot>
+    <div class="bg-transparent">
+        <div class="text-red-500">
+                <h2>タイトル</h2>
+        </div>
         <h1 class="title">
             {{ $memo->title }}
         </h1>
-        <div class="content">
-            <div class="content__memo">
-                <h3>本文</h3>
+        <div class="text-lime-500">
+            <h3>内容</h3>
+        </div>
+            <div class="content">
                 <p>{{ $memo->body }}</p>    
             </div>
         </div>
-        <div class="footer">
+        <div class="flex justify-center text-fuchsia-600">
             <a href="/memo">戻る</a>
         </div>
-        <div class="edit">
+        <div class="flex justify-center text-blue-600">
             <a href="/memos/{{ $memo->id }}/edit">edit</a>
         </div>
-    </body>
-</html>
+    </div>
+   </x-app-layout>
