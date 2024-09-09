@@ -1,3 +1,4 @@
+
 <x-app-layout>
     <x-slot name="title">試合データ</x-slot>
     <h1>ポジション</h1>
@@ -83,3 +84,4 @@
         </div>
     </form>
 </x-app-layout>
+
