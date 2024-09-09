@@ -1,12 +1,4 @@
-<!DOCTYPE HTML>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <title>Memos</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body>
+<x-app-layout>
     <h1 class="title">編集画面</h1>
     <div class="content">
         <form action="/memos/{{ $memo->id }}" method="POST">
@@ -17,10 +9,11 @@
                 <input type='text' name='memo[title]' value="{{ $memo->title }}">
             </div>
             <div class='content__body'>
-                <h2>本文</h2>
+                <h2>内容</h2>
                 <input type='text' name='memo[body]' value="{{ $memo->body }}">
             </div>
-            <input type="submit" value="保存">
+            <dic class="text-blue-600 flex justify-center">
+                <input type="submit" value="保存">
+            </div>
         </form>
-    </div>
-</body>
+</x-app-layout>

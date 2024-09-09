@@ -3,9 +3,10 @@
     <x-slot name="title">選手</x-slot>
     <h1>選手一覧</h1>
     
-    <h1>Player Name</h1>
-        <div class='players'>
+    <h1>選手情報</h1>
+        <div class='text-blue-700'>
             <a href='/players/create'>create</a>
+        </div>    
             @foreach ($players as $player)
                 <div class='name'>
                 <h2 class='name'>
@@ -15,7 +16,9 @@
                     <form action="/players/{{ $player->id }}" id="form_{{ $player->id }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button type="button" onclick="deletePost({{ $player->id }})">delete</button> 
+                        <div class="text-rose-500">
+                            <button type="button" onclick="deletePost({{ $player->id }})">delete</button>
+                        </div>
                     </form>
                 </div>
             @endforeach

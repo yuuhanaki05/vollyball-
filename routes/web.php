@@ -53,8 +53,10 @@ Route::get('/game',[GameController::class, 'index'])->middleware('auth')->name('
 Route::get('/games/create', [GameController::class, 'create'])->middleware('auth')->name('game.create');
 Route::get('/games/{game}', [GameController::class ,'show']);
 Route::post('/games', [GameController::class, 'store']);
-Route::get('/games/{game}/edit', [GameController::class, 'edit']);
+Route::get('/games/{game}/edit', [GameController::class, 'edit'])->middleware('auth')->name('game.edit');
 Route::put('/games/{game}', [GameController::class, 'update']);
 Route::delete('/games/{game}', [GameController::class,'delete']);
 Route::post('/games/{id}', 'GameController@update');
 require __DIR__.'/auth.php';
+
+

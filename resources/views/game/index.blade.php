@@ -14,8 +14,8 @@
                    <a href="/games/{{ $game->id }}">{{ $game->opponent_name }}</a>
                </h2>
                 
-                <p class='body'>{{ $game->body }}</p>
-                <form action="/games/{{ $game->id }}" id="form_{{ $game->id }}" method="post">
+                {{--<p class='body'>{{ $game->body }}</p>
+                <form action="/games/{{ $game->id }}" id="form_{{ $game->id }}" method="post">--}}
                 @csrf
                 @method('DELETE')
                 <button type="button" onclick="deletePost({{ $game->id }})">delete</button> 

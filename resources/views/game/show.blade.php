@@ -1,41 +1,61 @@
-<!DOCTYPE HTML>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Games</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body>
-        @foreach
-        <div class="position">
-                
-                <select name="game[position]">
-                  <option value="OH">OH</option>
-                  <option value="S">S</option>
-                  <option value="MB">MB</option>
-                  <option value="L">L</option>
-                  <option value="OP">OP</option>
-                </select>
-                <input type="text" name="name" placeholder="選手名"/>
-                 <p class="name__error" style="color:red">{{ $errors->first('game.name') }}</p>
-         @endforeach
-            </div>
-        <h1 class="opponent_name">
-            {{ $game->opponent_name }}
-        </h1>
+<x-app-layout>
+    <x-slot name="header">試合詳細(VS {{ $game->opponent_name }})</x-slot>
+    <x-slot name="title">試合詳細_{{ $game->opponent_name }}</x-slot>
+
+    <div class="flex justify-center text-red-500">
+    <h1>対戦相手</h1>
+    </div>
+    <div>
+    <h1 class="flex justify-center">
+        {{ $game->opponent_name }}
+    </h1> 
+    </div>
+    <div class="flex justify-center text-lime-500">
+        <h2>ポジション</h2>
+    </div>
+    <div class="m-5">
+        @foreach($positions as $index => $position)
         <div class="content">
-            <div class="content__post">
-                <h3>対戦相手</h3>
-                <p>{{ $game->body }}</p>    
+        @if($index < 6)  
+            <div class="grid justify-items-center">
+                <div>{{ $position->player->name }}({{ $position->player->position }})</div>
             </div>
-        <div class="footer">
-            <a href="/game">戻る</a>
+        @endif
         </div>
-        <div class="edit">
-            <a href="/games/{{ $game->id }}/edit">edit</a>
+        @if($index == 6)
+            <div class="flex justify-center">
+                {{ $position->player->name }}({{ $position->player->position }})
+            </div>
+        @endif
+        @endforeach
+    </div>
+    <div class="flex justify-center">
+    <h2>セット詳細</h2>
+    </div>
+    @foreach($sets as $set)
+    <div class="flex justify-evenly">
+    <h2 class="sets">
+        {{ $set->set_index }}
+    </h2>
+    <h2 class="sets">
+        {{ $set->our_points }}
+    </h2>
+    <svg class="h-8 w-8 text-slate-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="5" y1="12" x2="19" y2="12" /></svg>
+    <h2 class="sets">
+        {{ $set->opponent_points }}
+    </h2>
+    </div >
+    @endforeach
+    <div class="content">
+        <div class="content__post">
+            <h3>振り返りコメント</h3>
+            <p>{{ $game->body }}</p>    
         </div>
-        </div>
-    </body>
-</html>
+    <div class="flex justify-center text-fuchsia-600">
+        <a href="/game">戻る</a>
+    </div>
+    <div class="flex justify-center text-blue-600">
+        <a href="/games/{{ $game->id }}/edit">edit</a>
+    </div>
+    </div>
+</x-app-layout>

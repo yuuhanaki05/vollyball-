@@ -1,3 +1,4 @@
+<x-app-layout>       
         <x-slot name="選手名">選手名</x-slot>
 
         <h1>選手名追加</h1>
@@ -20,8 +21,9 @@
                 
                 <p class="position__error" style="color:red">{{ $errors->first('player.position') }}</p>
             </div>
-            <input type="submit" value="保存"/>
+            <div class="flex justify-center text-blue-600">
+                <input type="submit" value="保存"/>
+            </div>
         </form>
-        <div class="back">[<a href="/player">back</a>]</div>
-    </body>
-</html>
+        <div class="flex justify-center text-fuchsia-600">[<a href="/player">back</a>]</div>
+</x-app-layout>    
