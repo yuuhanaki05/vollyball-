@@ -85,15 +85,20 @@ class GameController extends Controller
         return view('/game/edit')->with(compact('players','game'));
         
     }
-    public function update(GameRequest $request, Game $game)
+    public function update(GameRequest $request, Game $game, Set $set)
     {
     $input_post = $request['game'];
     //dd($request['point']);
     $game->fill($input_post)->save();
     
-    $request['game']->$index;
-    $request['game']->$point;
-    
+    $input_point = $request['point'];
+    for($i = 0; $i < $input_point['set']; $i++){
+        $set_id = $input_point["set_id_$i"];
+        $set = $set->where('id', '=', $set_id)->first();
+        $set->our_points = $input_point["our_points_$i"];
+        $set->opponent_points = $input_point["opponent_points_$i"];
+        $set->save();
+    }
 
     return redirect('/games/' . $game->id);
     }
