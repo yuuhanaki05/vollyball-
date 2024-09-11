@@ -15,13 +15,13 @@
                 <h2>内容</h2>
             </div>
             <div class="w-full">    
-                <textarea class="w-5/6 flex justify-center" name="memo[body]" placeholder="メモ"></textarea> 
+                <textarea clas="mx-3 flex justify-center w-full h-40 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" name="memo[body]" placeholder="メモ"></textarea> 
                 <p class="body__error" style="color:red">{{ $errors->first('memo.body') }}</p>
             </div>
             <div class="flex justify-center text-blue-600">
             <input type="submit" value="保存"/>
             </div>
         </form>
-            <div class="flex justify-center text-fuchsia-600">[<a href="/memo">back</a>]</div>
+            <div class="flex justify-center text-fuchsia-600">[<a href="/memo">戻る</a>]</div>
     </div>
     </x-app-layout>

@@ -56,15 +56,14 @@ class GameController extends Controller
             $position->save();
         }
         //dd($game_id);
-            $input = $request['set'];
             //dd($request['set']['game_id']);
             $me_input = $request['me'];
             $op_input = $request['op'];
             // setsのデータの作成
            //dd($input);
         //for($i = 1; $i <= $input; $i++) {
-        foreach ($input as $index => $point) {
-            //dd($point);
+        foreach ($input_set as $index => $point) {
+            //dd($input);
             $set = new Set();
             $set->game_id = $game_id;
             $set->set_index = $index;
