@@ -30,7 +30,7 @@
         @endif
         @endforeach
     </div>
-    <div class="flex justify-center">
+    <div class="flex justify-center text-violet-600">
     <h2>セット詳細</h2>
     </div>
     @foreach($sets as $set)
@@ -51,8 +51,10 @@
 
     @endforeach
     <div class="content">
-        <div class="content__post">
+        <div class="flex justify-start">
             <h3>振り返りコメント</h3>
+        </div>
+        <div class="flex justify-start">
             <p>{{ $game->body }}</p>    
         </div>
 

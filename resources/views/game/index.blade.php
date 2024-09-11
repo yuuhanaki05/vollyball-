@@ -5,20 +5,21 @@
     
    
         
-    <h1>Game Result</h1>
-        <div class='games'>
+    <h1>試合結果</h1>
+        <div class='text-blue-700'>
             <a href='/games/create'>create</a>
+        </div>
+        <div>
             @foreach ($games as $game)
             <div class='opponent_name'>
                <h2 class='opponet_name'>
                    <a href="/games/{{ $game->id }}">{{ $game->opponent_name }}</a>
                </h2>
-                
-                {{--<p class='body'>{{ $game->body }}</p>
-                <form action="/games/{{ $game->id }}" id="form_{{ $game->id }}" method="post">--}}
                 @csrf
                 @method('DELETE')
-                <button type="button" onclick="deletePost({{ $game->id }})">delete</button> 
+                <div class="text-rose-500">
+                    <button type="button" onclick="deletePost({{ $game->id }})">delete</button> 
+                </div>
                 </form>
              </div>
             @endforeach

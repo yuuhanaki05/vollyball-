@@ -24,6 +24,8 @@
                         <input type="hidden" name='position[{{ $game->position }}][initial_position]' value="{{ $game->position }}">
                     </select>
                 </div>
+        </div>
+        <div>
             @endforeach
             {{-- 外側のループの最後の反復でメッセージを表示 --}} 
             <div class="flex justify-center">
@@ -51,34 +53,35 @@
             </div>   
         </div>             
 
-            <div class="flex justify-end">
+            {{--<div class="flex justify-end">
                 <button type="button" id="add-button"><svg class="h-8 w-8 text-slate-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                     </svg>
                 </button>
-            </div>
+            </div>--}}
             
             
                 <!-- scoresの中に得点がセットが追加されるごとに挿入されていく -->
                 {{--<div id="scores"></div>--}}
             <input type='hidden' name='point[set]' value="{{ count($game->sets) }}">
             @foreach($game->sets as $index => $point)
-                <div class='content__our_point'>
-                    <input type='text' name='point[our_points_{{ $index }}]' value="{{ $point->our_points }}">
+                <div class="flex justify-center">
+                    <div class='content__our_point'>
+                        <input type='text' name='point[our_points_{{ $index }}]' value="{{ $point->our_points }}">
+                    </div>
+                    
+                    <svg class="h-8 w-8 text-slate-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="5" y1="12" x2="19" y2="12" /></svg>
+                    
+                    <div class='content__opponent_point'>
+                        <input type='text' name='point[opponent_points_{{ $index }}]' value="{{ $point->opponent_points }}">
+                    </div>
+                    <input type='hidden' name='point[set_id_{{ $index }}]' value="{{ $point->id}}">
                 </div>
-                
-                <svg class="h-8 w-8 text-red-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="5" y1="12" x2="19" y2="12" /></svg>
-                
-                <div class='content__opponent_point'>
-                    <input type='text' name='point[opponent_points_{{ $index }}]' value="{{ $point->opponent_points }}">
-                </div>
-                <input type='hidden' name='point[set_id_{{ $index }}]' value="{{ $point->id}}">
             @endforeach   
 
-            <div class="w-5/6 flex justify-center">
-                <input type="text" name='game[body]' value="{{ $game->body }}">
+            <div class="w-full m-5">
+                <textarea class="mx-3 flex justify-center w-full h-40 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" name='game[body]' value="{{ $game->body }}"></textarea>
             </div>
-        </div>
         <div class="flex justify-center text-blue-600">
         <input type="submit" value="保存">
         </div>
