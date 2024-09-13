@@ -2,25 +2,24 @@
     <x-slot name="title">試合データ</x-slot>
     <h1>ポジション</h1>
 
-    <form class="w-full" action="/games" method="POST">
+    <form class="text" action="/games" method="POST">
         @csrf
        <div class="m-5">
-            @for($i = 0; $i <= 5; $i++)
-                <div class="grid grid-cols-3 gap-1">
-                    <select class="col-span-3" name="position[{{ $i }}][player_id]">
-                         <div class="grid grid-cols-3 gap-1">
-                        @foreach($players as $player)
-                            <!-- 通常の$playersの要素の場合に表示する要素 -->
-                            <div class="flex-initial w-64">
+           <div class="grid grid-cols-3 gap-4 justify-items-center p-4">
+                @for($i = 0; $i <= 5; $i++)
+                    <div class="w-1/3 flex justify-center">
+                        <select class="text" name="position[{{ $i }}][player_id]">
+                            @foreach($players as $player)
+                                <!-- 通常の$playersの要素の場合に表示する要素 -->
                                 <option value="{{ $player->id }}">
                                     {{ $player->name }} ({{ $player->position }})
                                 </option>
-                            </div>
-                        @endforeach
-                        <input type="hidden" name="position[{{ $i }}][initial_position]" value="{{ $i }}">
-                    </select>
-                </div>
-            @endfor
+                            @endforeach
+                            <input type="hidden" name="position[{{ $i }}][initial_position]" value="{{ $i }}">
+                        </select>
+                    </div>
+                @endfor
+            </div>
             {{-- 外側のループの最後の反復でメッセージを表示 --}} 
             <div class="flex justify-center">
                 <select name="position[6][player_id]">

@@ -14,11 +14,11 @@
     <div class="flex justify-center text-lime-500">
         <h2>ポジション</h2>
     </div>
-    <div class="m-5">
+    <div class="m-5 grid grid-cols-3 gap-4 justify-items-center p-4">
         @foreach($positions as $index => $position)
-        <div class="content">
+        <div class="">
         @if($index < 6)  
-            <div class="grid justify-items-center">
+            <div class="flex justify-center">
                 <div>{{ $position->player->name }}({{ $position->player->position }})</div>
             </div>
         @endif
@@ -50,11 +50,11 @@
     </div >
 
     @endforeach
-    <div class="content">
-        <div class="flex justify-start">
+        <div class="mx-3 text-amber-500">
             <h3>振り返りコメント</h3>
+            <div></div>
         </div>
-        <div class="flex justify-start">
+        <div class="mx-3">
             <p>{{ $game->body }}</p>    
         </div>
 
@@ -64,6 +64,5 @@
     <div class="flex justify-center text-blue-600">
 
         <a href="/games/{{ $game->id }}/edit">edit</a>
-    </div>
     </div>
 </x-app-layout>
