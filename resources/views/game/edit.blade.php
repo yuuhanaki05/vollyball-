@@ -1,32 +1,30 @@
 
 <x-app-layout>
     <x-slot name="title">試合データ</x-slot>
+    <div class="flex justify-center">
     <h1>ポジション</h1>
-    <form class="content" action="/games/{{ $game->id }}" method="POST">
+    </div>
+    <form class="text" action="/games/{{ $game->id }}" method="POST">
         @csrf
         @method('PUT')
        <div class="m-5">
-           @foreach($game->positions as $index => $position)
-                @if($index == 6)
-                    @break
-                @endif
-                <div class="grid grid-cols-3 gap-1">
-                    <select class="col-span-3" name="position[{{ $position->id }}][player_id]" value="{{ $position->player->id }}">
-                         <div class="grid grid-cols-3 gap-1">
-                        @foreach($players as $player)
-                            <!-- 通常の$playersの要素の場合に表示する要素 -->
-                            <div class="flex-initial w-64">
-                                <option value="{{ $player->id }}" {{ $position->player->id == $player->id ? 'selected' : '' }} >
-                                    {{ $player->name }} ({{ $player->position }})
-                                </option>
-                            </div>
-                        @endforeach
-                        <input type="hidden" name='position[{{ $game->position }}][initial_position]' value="{{ $game->position }}">
-                    </select>
-                </div>
-        </div>
-        <div>
-            @endforeach
+           <div class="grid grid-cols-3 gap-4 justify-items-center p-4">
+               @foreach($game->positions as $index => $position)
+                    @if($index == 6)
+                        @break
+                    @endif
+                        <select class="w-1/3 flex justify-center" name="position[{{ $position->id }}][player_id]" value="{{ $position->player->id }}">
+                            @foreach($players as $player)
+                                <!-- 通常の$playersの要素の場合に表示する要素 -->
+                                    <option value="{{ $player->id }}" {{ $position->player->id == $player->id ? 'selected' : '' }} >
+                                        {{ $player->name }} ({{ $player->position }})
+                                    </option>
+                            @endforeach
+                            <input type="hidden" name='position[{{ $game->position }}][initial_position]' value="{{ $game->position }}">
+                        </select>
+                @endforeach
+            </div>
+        <div>    
             {{-- 外側のループの最後の反復でメッセージを表示 --}} 
             <div class="flex justify-center">
                 <select name="position[6][player_id]">
@@ -40,7 +38,7 @@
                 </select>
             </div>
         </div>
-       
+       </div> 
         <div class="flex justify-around">
             <div class="our-team">
                 <h1>{{ Auth::user()->name }}</h1>
